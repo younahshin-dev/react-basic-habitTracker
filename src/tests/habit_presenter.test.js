@@ -22,16 +22,26 @@ describe('habit tracker', () => {
   it('increment gain 1 to count of habit,  call update callback', () => {
     habitPresenter.increment(habits[0], update);
     expect(habitPresenter.getHabits()[0].count).toBe(1);
+    chekcUpdateCalled();
+    
   });
 
   it('decrement minus 1 to count of habit,  call update callback', () => {
     habitPresenter.decrement(habits[1], update);
     expect(habitPresenter.getHabits()[1].count).toBe(0);
+    chekcUpdateCalled();
+  });
+
+  it('does not set the value below zero when decrements', () => {
+    habitPresenter.decrement(habits[0], update);
+    habitPresenter.decrement(habits[0], update);
+    expect(habitPresenter.getHabits()[0].count).toBe(0);
   });
 
   it('delete is remove habit', () => {
     habitPresenter.delete(habits[1], update);
     expect(habitPresenter.getHabits().length).toBe(2);
+    chekcUpdateCalled();
   });
 
   it('add habit', () => {
@@ -41,6 +51,11 @@ describe('habit tracker', () => {
 
   it('reset habit -> make every count 0', () => {
     habitPresenter.reset(update);
-    expect(habitPresenter.getHabits().[0].count).toBe(0);
+    expect(habitPresenter.getHabits()[0].count).toBe(0);
   });
+
+  function chekcUpdateCalled() {
+    expect(update).toHaveBeenCalledTimes(1);
+    expect(update).toHaveBeenCalledWith(habitPresenter.getHabits());
+  }
 });
