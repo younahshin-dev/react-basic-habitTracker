@@ -1,22 +1,46 @@
-const HabitPresenter = require('../habit_presenter.js');
+import HabitPresenter from '../habit_presenter.js';
 
 describe('habit tracker', () => {
   let habitPresenter;
   const habits = [
     {id: 1, name: 'Reading', count:0},
-    {id: 1, name: 'Running', count:0},
-    {id: 1, name: 'Coding', count:0}
+    {id: 2, name: 'Running', count:1},
+    {id: 3, name: 'Coding', count:0}
   ]; 
+
+  let update;
+  
   beforeEach(() => {
     habitPresenter = new HabitPresenter(habits);
+    update = jest.fn(() => {}) //함수 목킹
   });
-  it('plus is gain 1', () => {
-    expect(
-      habitPresenter.getHabit()
-      ).toBe([
-        {id: 1, name: 'Reading', count:0},
-        {id: 1, name: 'Running', count:0},
-        {id: 1, name: 'Coding', count:0}
-      ]);
+
+  it('habit should be initiated', () => {
+    expect(habitPresenter.getHabits()).toEqual(habits);
+  });
+
+  it('increment gain 1 to count of habit,  call update callback', () => {
+    habitPresenter.increment(habits[0], update);
+    expect(habitPresenter.getHabits()[0].count).toBe(1);
+  });
+
+  it('decrement minus 1 to count of habit,  call update callback', () => {
+    habitPresenter.decrement(habits[1], update);
+    expect(habitPresenter.getHabits()[1].count).toBe(0);
+  });
+
+  it('delete is remove habit', () => {
+    habitPresenter.delete(habits[1], update);
+    expect(habitPresenter.getHabits().length).toBe(2);
+  });
+
+  it('add habit', () => {
+    habitPresenter.add('Game', update);
+    expect(habitPresenter.getHabits().length).toBe(4);
+  });
+
+  it('reset habit -> make every count 0', () => {
+    habitPresenter.reset(update);
+    expect(habitPresenter.getHabits().[0].count).toBe(0);
   });
 });
