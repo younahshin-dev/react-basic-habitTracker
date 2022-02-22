@@ -61,13 +61,23 @@ describe('habit tracker', () => {
     }).toThrowError(`The max count of habit that you can add is 4`);
   });
 
-  it('reset habit -> make every count 0', () => {
-    habitPresenter.reset(update);
-    expect(habitPresenter.getHabits()[0].count).toBe(0);
-    expect(habitPresenter.getHabits()[1].count).toBe(0);
-    expect(habitPresenter.getHabits()[2].count).toBe(0);
-    chekcUpdateCalled();
+  describe('reset', () => {
+    it('reset habit -> make every count 0', () => {
+      habitPresenter.reset(update);
+      expect(habitPresenter.getHabits()[0].count).toBe(0);
+      expect(habitPresenter.getHabits()[1].count).toBe(0);
+      expect(habitPresenter.getHabits()[2].count).toBe(0);
+      chekcUpdateCalled();
+    });
+
+    it('does not create new object when count is 0', () => {
+      const habits = habitPresenter.getHabits();
+      habitPresenter.reset(update);
+      const updatedHabits = habitPresenter.getHabits();
+      expect(updatedHabits[0]).toBe(habits[0]); // toEqual 은 안의 내용을 비교하기때문에 레퍼런스 체크가 안됨 toBe 는 참조값을 체크
+    }); 
   });
+  
 
   function chekcUpdateCalled() {
     expect(update).toHaveBeenCalledTimes(1);
