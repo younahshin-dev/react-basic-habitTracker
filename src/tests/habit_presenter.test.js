@@ -41,17 +41,24 @@ describe('habit tracker', () => {
   it('delete is remove habit', () => {
     habitPresenter.delete(habits[1], update);
     expect(habitPresenter.getHabits().length).toBe(2);
+    expect(habitPresenter.getHabits()[1].name).toBe('Coding');
     chekcUpdateCalled();
   });
 
   it('add habit', () => {
     habitPresenter.add('Game', update);
     expect(habitPresenter.getHabits().length).toBe(4);
+    expect(habitPresenter.getHabits()[3].name).toBe('Game');
+    expect(habitPresenter.getHabits()[3].count).toBe(0);
+    chekcUpdateCalled();
   });
 
   it('reset habit -> make every count 0', () => {
     habitPresenter.reset(update);
     expect(habitPresenter.getHabits()[0].count).toBe(0);
+    expect(habitPresenter.getHabits()[1].count).toBe(0);
+    expect(habitPresenter.getHabits()[2].count).toBe(0);
+    chekcUpdateCalled();
   });
 
   function chekcUpdateCalled() {
