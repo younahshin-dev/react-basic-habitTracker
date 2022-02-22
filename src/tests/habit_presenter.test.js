@@ -11,7 +11,7 @@ describe('habit tracker', () => {
   let update;
   
   beforeEach(() => {
-    habitPresenter = new HabitPresenter(habits);
+    habitPresenter = new HabitPresenter(habits, 4);
     update = jest.fn(() => {}) //함수 목킹
   });
 
@@ -51,6 +51,14 @@ describe('habit tracker', () => {
     expect(habitPresenter.getHabits()[3].name).toBe('Game');
     expect(habitPresenter.getHabits()[3].count).toBe(0);
     chekcUpdateCalled();
+  });
+
+  it('throws an error when the max habits limit is exceeded', () => {
+    habitPresenter.add('Game', update);
+    expect(() => {
+      habitPresenter.add('Eating', update);
+
+    }).toThrowError(`The max count of habit that you can add is 4`);
   });
 
   it('reset habit -> make every count 0', () => {
