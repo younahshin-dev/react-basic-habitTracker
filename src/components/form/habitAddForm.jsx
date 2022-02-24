@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-const habitAddForm = memo((props) => {
+const HabitAddForm = memo((props) => {
   const formRef = React.createRef();
   const inputRef = React.createRef();
 
@@ -24,5 +24,5 @@ const habitAddForm = memo((props) => {
   );
 });
 
-export default habitAddForm;
+export default HabitAddForm;
 
