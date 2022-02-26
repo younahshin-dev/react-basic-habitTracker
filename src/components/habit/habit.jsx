@@ -27,7 +27,7 @@ class Habit extends PureComponent {
       <li className="habit">
         <span className="habit-name">{name}</span>
         <span className="habit-count">{count}</span>
-        <button
+        <button data-testid="increseBtn"
           className="habit-button habit-increase"
           onClick={this.handleIncrement}
         >

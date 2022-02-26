@@ -14,10 +14,6 @@ describe('HabitAddForm', () => {
     expect(component.toJSON()).toMatchSnapshot();
   })
 
-  it('renders', () => {
-
-  });
-
   describe('Form Submit', () => {
     let onAdd;
     let input;
