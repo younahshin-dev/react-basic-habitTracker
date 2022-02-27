@@ -25,6 +25,7 @@ exports[`Habit renders 1`] = `
   </button>
   <button
     className="habit-button habit-decrease"
+    data-testid="decreseBtn"
     onClick={[Function]}
   >
     <i
@@ -33,6 +34,7 @@ exports[`Habit renders 1`] = `
   </button>
   <button
     className="habit-button habit-delete"
+    data-testid="deleteBtn"
     onClick={[Function]}
   >
     <i

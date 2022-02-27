@@ -33,13 +33,13 @@ class Habit extends PureComponent {
         >
           <i className="fas fa-plus-square"></i>
         </button>
-        <button
+        <button data-testid="decreseBtn"
           className="habit-button habit-decrease"
           onClick={this.handleDecrement}
         >
           <i className="fas fa-minus-square"></i>
         </button>
-        <button
+        <button data-testid="deleteBtn"
           className="habit-button habit-delete"
           onClick={this.handleDelete}
         >

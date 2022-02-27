@@ -1,5 +1,5 @@
-import react from 'react'
-import {render, screen, waitFor} from '@testing-library/react'
+
+import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 // add custom jest matchers from jest-dom
 import '@testing-library/jest-dom'
@@ -26,7 +26,9 @@ describe('Habit', () => {
     let onDecrement;
     let onDelete;
     
-    let button;
+    let plusButton;
+    let minusButton;
+    let deleteButton;
   
     beforeEach(()=> {
       onIncrement = jest.fn();
@@ -41,16 +43,36 @@ describe('Habit', () => {
         onDelete={onDelete}
       />);
 
-      button = screen.getByTestId('increseBtn');
+      plusButton = screen.getByTestId('increseBtn');
+      minusButton = screen.getByTestId('decreseBtn');
+      deleteButton = screen.getByTestId('deleteBtn');
     })
   
     it('calls onIncrement when first button is clicked', () => {
       //input 에다가 원하는 습관의 이름을 타이핑 한다음 
       //add라는 버튼을 클릭하면
       //onAdd가 input에 입력한 이름으로 호출되어야 함
-      userEvent.click(button);
+      userEvent.click(plusButton);
   
       expect(onIncrement).toHaveBeenCalledTimes(1);
+    });
+
+    it('calls onDecrement when first button is clicked', () => {
+      //input 에다가 원하는 습관의 이름을 타이핑 한다음 
+      //add라는 버튼을 클릭하면
+      //onAdd가 input에 입력한 이름으로 호출되어야 함
+      userEvent.click(minusButton);
+  
+      expect(onDecrement).toHaveBeenCalledTimes(1);
+    });
+
+    it('calls onDelete when first button is clicked', () => {
+      //input 에다가 원하는 습관의 이름을 타이핑 한다음 
+      //add라는 버튼을 클릭하면
+      //onAdd가 input에 입력한 이름으로 호출되어야 함
+      userEvent.click(deleteButton);
+  
+      expect(onDelete).toHaveBeenCalledTimes(1);
     });
   });
     
