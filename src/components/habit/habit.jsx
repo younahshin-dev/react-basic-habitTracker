@@ -24,9 +24,9 @@ class Habit extends PureComponent {
   render() {
     const { name, count } = this.props.habit;
     return (
-      <li className="habit">
-        <span className="habit-name">{name}</span>
-        <span className="habit-count">{count}</span>
+      <li  className="habit">
+        <span data-testid='habit-name' className="habit-name">{name}</span>
+        <span data-testid='habit-count' className="habit-count">{count}</span>
         <button title="increseBtn"
           className="habit-button habit-increase"
           onClick={this.handleIncrement}

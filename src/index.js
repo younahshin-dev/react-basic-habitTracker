@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './app.jsx';
+import App from './app/app.jsx';
 import '@fortawesome/fontawesome-free/js/all.js';
-import HabitPresenter from './habit_presenter.js';
+import HabitPresenter from './app/habit_presenter.js';
 
 const habitPresenter = new HabitPresenter(
   [

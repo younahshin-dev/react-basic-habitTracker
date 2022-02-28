@@ -1,5 +1,5 @@
 
-import '@testing-library/jest-dom'
+//import '@testing-library/jest-dom'
 import Navbar from '../navbar';
 import renderer from 'react-test-renderer';
 
