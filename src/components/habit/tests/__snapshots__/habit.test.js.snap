@@ -16,8 +16,8 @@ exports[`Habit renders 1`] = `
   </span>
   <button
     className="habit-button habit-increase"
-    data-testid="increseBtn"
     onClick={[Function]}
+    title="increseBtn"
   >
     <i
       className="fas fa-plus-square"
@@ -25,8 +25,8 @@ exports[`Habit renders 1`] = `
   </button>
   <button
     className="habit-button habit-decrease"
-    data-testid="decreseBtn"
     onClick={[Function]}
+    title="decreseBtn"
   >
     <i
       className="fas fa-minus-square"
@@ -34,8 +34,8 @@ exports[`Habit renders 1`] = `
   </button>
   <button
     className="habit-button habit-delete"
-    data-testid="deleteBtn"
     onClick={[Function]}
+    title="deleteBtn"
   >
     <i
       className="fas fa-trash"

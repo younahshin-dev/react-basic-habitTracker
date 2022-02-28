@@ -27,19 +27,19 @@ class Habit extends PureComponent {
       <li className="habit">
         <span className="habit-name">{name}</span>
         <span className="habit-count">{count}</span>
-        <button data-testid="increseBtn"
+        <button title="increseBtn"
           className="habit-button habit-increase"
           onClick={this.handleIncrement}
         >
           <i className="fas fa-plus-square"></i>
         </button>
-        <button data-testid="decreseBtn"
+        <button title="decreseBtn"
           className="habit-button habit-decrease"
           onClick={this.handleDecrement}
         >
           <i className="fas fa-minus-square"></i>
         </button>
-        <button data-testid="deleteBtn"
+        <button title="deleteBtn"
           className="habit-button habit-delete"
           onClick={this.handleDelete}
         >

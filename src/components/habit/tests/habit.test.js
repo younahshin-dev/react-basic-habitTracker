@@ -9,71 +9,71 @@ import renderer from 'react-test-renderer';
 describe('Habit', () => {
 
   const habit = {id: 1, name: 'Reading', count:0};
+  
+  let onIncrement;
+  let onDecrement;
+  let onDelete;
+
+  let habitComponent;
+
+  beforeEach(()=> {
+    onIncrement = jest.fn();
+    onDecrement = jest.fn();
+    onDelete = jest.fn();
+
+    habitComponent = (<Habit
+      //key={habit.id}
+      habit={habit}
+      onIncrement={onIncrement}
+      onDecrement={onDecrement}
+      onDelete={onDelete}
+    />);
+
+  })
 
   it('renders', () => {
     //스냅샷 테스트
-    const component = renderer.create(
-        <Habit habit={habit} onIncrement={jest.fn()}
-             onDecrement={jest.fn()}
-             onDelete={jest.fn()}/>
-    );
-
+    const component = renderer.create(habitComponent);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   describe('Form Submit', () => {
-    let onIncrement;
-    let onDecrement;
-    let onDelete;
+  
+    describe('button click', () => {
+
+      beforeEach(() => {
+        render(habitComponent);
+      });
+
+      it('calls onIncrement when first button is clicked', () => {
+        //input 에다가 원하는 습관의 이름을 타이핑 한다음 
+        //add라는 버튼을 클릭하면
+        //onAdd가 input에 입력한 이름으로 호출되어야 함
+        const plusButton = screen.getByTitle('increseBtn');
+        userEvent.click(plusButton);
     
-    let plusButton;
-    let minusButton;
-    let deleteButton;
+        expect(onIncrement).toHaveBeenCalledTimes(1);
+      });
   
-    beforeEach(()=> {
-      onIncrement = jest.fn();
-      onDecrement = jest.fn();
-      onDelete = jest.fn();
-
-      render(<Habit
-        //key={habit.id}
-        habit={habit}
-        onIncrement={onIncrement}
-        onDecrement={onDecrement}
-        onDelete={onDelete}
-      />);
-
-      plusButton = screen.getByTestId('increseBtn');
-      minusButton = screen.getByTestId('decreseBtn');
-      deleteButton = screen.getByTestId('deleteBtn');
-    })
+      it('calls onDecrement when first button is clicked', () => {
+        //input 에다가 원하는 습관의 이름을 타이핑 한다음 
+        //add라는 버튼을 클릭하면
+        //onAdd가 input에 입력한 이름으로 호출되어야 함
+        const minusButton = screen.getByTitle('decreseBtn');
+        userEvent.click(minusButton);
+    
+        expect(onDecrement).toHaveBeenCalledTimes(1);
+      });
   
-    it('calls onIncrement when first button is clicked', () => {
-      //input 에다가 원하는 습관의 이름을 타이핑 한다음 
-      //add라는 버튼을 클릭하면
-      //onAdd가 input에 입력한 이름으로 호출되어야 함
-      userEvent.click(plusButton);
-  
-      expect(onIncrement).toHaveBeenCalledTimes(1);
-    });
-
-    it('calls onDecrement when first button is clicked', () => {
-      //input 에다가 원하는 습관의 이름을 타이핑 한다음 
-      //add라는 버튼을 클릭하면
-      //onAdd가 input에 입력한 이름으로 호출되어야 함
-      userEvent.click(minusButton);
-  
-      expect(onDecrement).toHaveBeenCalledTimes(1);
-    });
-
-    it('calls onDelete when first button is clicked', () => {
-      //input 에다가 원하는 습관의 이름을 타이핑 한다음 
-      //add라는 버튼을 클릭하면
-      //onAdd가 input에 입력한 이름으로 호출되어야 함
-      userEvent.click(deleteButton);
-  
-      expect(onDelete).toHaveBeenCalledTimes(1);
+      it('calls onDelete when first button is clicked', () => {
+        //input 에다가 원하는 습관의 이름을 타이핑 한다음 
+        //add라는 버튼을 클릭하면
+        //onAdd가 input에 입력한 이름으로 호출되어야 함
+        const deleteButton = screen.getByTitle('deleteBtn');
+        userEvent.click(deleteButton);
+    
+        expect(onDelete).toHaveBeenCalledTimes(1);
+      });
     });
   });
-    
 });
