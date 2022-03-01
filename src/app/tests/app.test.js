@@ -49,6 +49,7 @@ describe('App', () => {
       
       const button = screen.getAllByTitle("increseBtn")[0];
       userEvent.click(button);
+      
       const count = screen.getByTestId("total-count");
       expect(count.innerHTML).toBe('1');
     });
